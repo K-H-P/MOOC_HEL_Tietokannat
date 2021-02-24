@@ -11,9 +11,9 @@
 ### teht1
 
 Ohjelma tulee ajaa toiminnolla
-´´´
+```
 java -classpath ".:sqlite-jdbc-3.32.3.2.jar" kanta.java
-´´´
+```
 
 ## Sources
 
