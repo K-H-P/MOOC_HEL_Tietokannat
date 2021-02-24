@@ -53,7 +53,21 @@ public class kanta {
 
     private static void function1(Connection c) {
         Scanner one = new Scanner(System.in);
-        System.out.println("Toiminto1");
+        System.out.println("Summataan vuoden opintopisteet. Anna vuosi: ");
+        String year = one.nextLine();
+
+        
+        String query = "SELECT SUM(laajuus) as Laajuus FROM Suoritukset S, Kurssit K WHERE K.id=S.kurssi_id AND S.paivays like '"+year+"%'";        
+        
+        try (Statement stmt = c.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                System.out.println(rs.getInt("Laajuus"));
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+          }
     }
 
     private static void function2(Connection c) {
