@@ -23,9 +23,9 @@ java -classpath ".:sqlite-jdbc-3.32.3.2.jar" kanta.java
 
 ## Yhteystiedot
 
-Kris H. Papaleonidas
-krhapa@utu.fi
-Turun Yliopisto
-519273
-
-Otathan yhteyttä ongelmien tai epäselvyyksien ilmetessä. Kiitos.
+Kris H. Papaleonidas  
+krhapa@utu.fi  
+Turun Yliopisto  
+519273  
+  
+Otathan yhteyttä ongelmien tai epäselvyyksien ilmetessä. Kiitos.  
