@@ -1,14 +1,14 @@
 # Tietokannat MOOC Helsingin Yliopisto 2021
 
-Valmis / Kesken | Päiväys   | Muuta
------------ |   ----------- | --------
-- [ ] teht1 |          | 
-- [ ] teht2 |          | 
-- [ ] teht3 |          | 
-- [ ] teht4 |          | 
-- [ ] teht5 |          | 
-- [X] teht6 | 25.2.2021 | Yksi kysely puuttu 
-- [ ] teht7 |          |
+| Valmis / Kesken | Päiväys   | Muuta |
+|-----------------|-----------|-------|
+| [ ] teht1 |||
+| [ ] teht2 |||
+| [ ] teht3 |||
+| [ ] teht4 |||
+| [ ] teht5 |||
+| [X] teht6 | 25.2.2021 | Yksi kysely puuttu |
+| [ ] teht7 |||
 
 ### teht1
 
