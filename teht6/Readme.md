@@ -21,11 +21,62 @@ Lähteet:
 # MongoDB usage
 
 // https://docs.mongodb.com/manual/reference/method/db.createCollection/
-db.createCollection("Tyontekijat")
 
+#### Create table...
+```
+db.createCollection("Tyontekijat")
+```
+
+#### Insert into...
+Did not use autoincrement field, because they were not recommended. If you want use auto increment --> [Link](https://web.archive.org/web/20151009224806/http://docs.mongodb.org/manual/tutorial/create-an-auto-incrementing-field/)
+
+```
 db.Tyontekijat.insertMany(
-    {
-        "nimi": 'Maija', "yritys": 'Google', "palkaa": 8000,
-    },
+    { "id": 1, "nimi": 'Maija', "yritys": 'Google', "palkka": 8000 },
+    { "id": 2, "nimi": 'Uolevi', "yritys": 'Amazon', "palkka": 5000 },
+    { "id": 3, "nimi": 'Kotivalo', "yritys": 'Google', "palkka": 7000 },
+    { "id": 4, "nimi": 'Kaaleppi', "yritys": 'Facebook', "palkka": 6000 },
+    { "id": 5, "nimi": 'Liisa', "yritys": 'Amazon', "palkka": 9000 },
+    { "id": 6, "nimi": 'Anna', "yritys": 'Amazon', "palkka": 6500 }
+)
+```
+
+#### Select *...
+```
+db.Tyontekijat.find( {} )
+```
+
+#### Update...
+Because we did not use auto increment id field, I would "normally" just iterate through the object to find right places. But in this small dataset I just point out by name.
+```
+db.Tyontekijat.update(
+    { "id": 2 },
+    {$set: { "palkka": 5500 }}
+)
+```
+
+#### Select *...Where amazon
+```
+db.Tyontekijat.find(
+    { "yritys": "Amazon" },
+
+    { "nimi":1, "palkka":0}
 
 )
+```
+
+#### Select COUNT...Where google
+```
+db.Tyontekijat.count(
+    { "yritys": "Google" },
+)
+```
+
+#### Select *...Where palkka>6000
+```
+db.Tyontekijat.find(
+    { palkka: { $gt: 6000 }},
+    
+    { "nimi":1, "yritys":1 }
+)
+```
