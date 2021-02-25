@@ -12,11 +12,10 @@ public class kanta {
         
         Connection conn = null;
         try {
-            //Ongelma jdbc kanssa... 
+            //Problem with jdbc, not running without manual... 
             conn = DriverManager.getConnection("jdbc:sqlite:kurssit.db");
             Statement statement = conn.createStatement();
             statement.setQueryTimeout(30);
-            //System.out.println("Toimii");
         
 
             Scanner input = new Scanner(System.in);
@@ -56,7 +55,7 @@ public class kanta {
         System.out.println("Summataan vuoden opintopisteet. Anna vuosi: ");
         String year = one.nextLine();
 
-        
+        // This is not the best query. YEAR() is not working?
         String query = "SELECT SUM(laajuus) as Laajuus FROM Suoritukset S, Kurssit K WHERE K.id=S.kurssi_id AND S.paivays like '"+year+"%'";        
         
         try (Statement stmt = c.createStatement()) {
@@ -72,7 +71,21 @@ public class kanta {
 
     private static void function2(Connection c) {
         Scanner two = new Scanner(System.in);
-        System.out.println("Toiminto2");
+        System.out.println("Tulostetaan annetun opiskelijan kaikki suoritukset aikajärjestyksessä. Anna nimi: ");
+        String name = two.nextLine();
+
+        // SQL query ok, print not ok
+        String query = "SELECT K.nimi as kurssi, K.laajuus as op, S.paivays as päiväys, S.arvosana as arvosana FROM Kurssit K, Suoritukset S, Opiskelijat O WHERE K.id=S.kurssi_id AND O.id=S.opiskelija_id AND O.nimi='"+name+"' ORDER BY S.paivays;";
+        
+        try (Statement stmt = c.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                System.out.println(rs.getString("kurssi"));
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+          }
     }
 
     private static void function3(Connection c) {
