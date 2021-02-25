@@ -2,12 +2,12 @@
 
 | Valmis / Kesken | Päiväys   | Muuta |
 |-----------------|-----------|-------|
-| [ ] teht1 |||
-| [ ] teht2 |||
-| [ ] teht3 |||
-| [ ] teht4 |||
-| [ ] teht5 |||
-| [X] teht6 | 25.2.2021 | Yksi kysely puuttu |
+| [ ] teht1 || Työn alla |
+| [ ] teht2 || Työn alla |
+| [ ] teht3 || Aloittamatta |
+| [ ] teht4 || Aloittamatta |
+| [X] teht5 | 26.2.2021 | Oikoluku pitää tehdä |
+| [X] teht6 | 25.2.2021 | Yksi kysely puuttu, oikoluku |
 | [ ] teht7 |||
 
 ### teht1
