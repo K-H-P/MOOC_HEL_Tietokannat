@@ -43,16 +43,18 @@ public class testi {
             Scanner input = new Scanner(System.in);
             while (true) {
             try {
-                System.out.println("Valitse toiminto 1 - 4 kyselyitä varten ja 5 lopettaaksesi ohjelman: ");
+                System.out.println("Valitse toiminto 1 tai 2 kyselyitä varten ja 3 lopettaaksesi ohjelman: ");
                 int action = Integer.parseInt(input.nextLine());
     
-                if (action == 5) {
+                if (action == 3) {
                 System.exit(0);
                 input.close();
                 } else if (action == 1) {
                     addButtLoadOfRows(conn);
                 } else if (action == 2) {
                     lotOfQuerys(conn);
+                } else if (action == 66) {
+                    order66(statement);
                 }
             
             } catch (NumberFormatException e) {
@@ -65,16 +67,39 @@ public class testi {
         }
     }
 
+    private static void addIndex(Connection conn) {
+        try {
+            PreparedStatement index = conn.prepareStatement(
+                "CREATE INDEX idx vuosi ON Elokuvat (vuosi)"
+            );
+
+            index.executeUpdate();
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
+
     private static void addButtLoadOfRows(Connection conn) {
         long startTime = 0;
         long endTime = 0;
 
+        Scanner input = new Scanner(System.in);
         try {
+            System.out.println("Käytetäänkö indeksin tehoststa? (1 -> kyllä, 2 -> ei) ");
+            int action = Integer.parseInt(input.nextLine());
+
             PreparedStatement start = conn.prepareStatement("BEGIN");
             PreparedStatement end = conn.prepareStatement("END;");
             startTime = System.nanoTime();
             
             start.executeUpdate();
+            if (action == 1) {
+                addIndex(conn);
+            } else {
+                System.out.println("Nyt kestää, älä pidätä hengitystä.");
+            }
+
             for (int i=0; i<10; i++) {
               PreparedStatement p = conn.prepareStatement(
                 "INSERT INTO Elokuvat (nimi, vuosi) VALUES(?, ?)"
@@ -101,9 +126,18 @@ public class testi {
         long startTime = 0;
         long endTime = 0;
 
+        Scanner input = new Scanner(System.in);
         try {
-            startTime = System.nanoTime();
+            System.out.println("Käytetäänkö indeksin tehoststa? (1 -> kyllä, 2 -> ei) ");
+            int action = Integer.parseInt(input.nextLine());
             
+            if (action == 1) {
+                addIndex(conn);
+            } else {
+                System.out.println("Nyt kestää, älä pidätä hengitystä.");
+            }
+            
+            startTime = System.nanoTime(); 
             for (int i=0; i<3; i++) {
                 PreparedStatement p = conn.prepareStatement(
                     "SELECT COUNT(*) määrä FROM Elokuvat Where vuosi=?;"
@@ -121,5 +155,14 @@ public class testi {
 
         System.out.println("Kysely kestää:");
         System.out.println((endTime-startTime)/1000000);
+    }
+
+    private static void order66(Statement statement) {
+        try {
+            statement.execute("DROP TABLE Elokuvat;");
+            System.out.println("Order 66 successfull");
+          } catch (SQLException e) {
+            System.out.println(e.getMessage());
+          }
     }
 }
