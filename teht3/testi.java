@@ -44,13 +44,15 @@ public class testi {
             while (true) {
             try {
                 System.out.println("Valitse toiminto 1 - 4 kyselyitä varten ja 5 lopettaaksesi ohjelman: ");
-                int toiminto = Integer.parseInt(input.nextLine());
+                int action = Integer.parseInt(input.nextLine());
     
-                if (toiminto == 5) {
+                if (action == 5) {
                 System.exit(0);
                 input.close();
-                } else if (toiminto == 1) {
-                    addButtLoadOfRows(conn);;
+                } else if (action == 1) {
+                    addButtLoadOfRows(conn);
+                } else if (action == 2) {
+                    lotOfQuerys(conn);
                 }
             
             } catch (NumberFormatException e) {
@@ -64,9 +66,13 @@ public class testi {
     }
 
     private static void addButtLoadOfRows(Connection conn) {
+        long startTime = 0;
+        long endTime = 0;
+
         try {
             PreparedStatement start = conn.prepareStatement("BEGIN");
             PreparedStatement end = conn.prepareStatement("END;");
+            startTime = System.nanoTime();
             
             start.executeUpdate();
             for (int i=0; i<10; i++) {
@@ -81,11 +87,39 @@ public class testi {
                 p.executeUpdate();
             }
             end.executeUpdate();
+            endTime = System.nanoTime();
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        System.out.println("Lisätty rivit ajassa: ");
+        System.out.println("Lisätty rivit ajassa:");
+        System.out.println((endTime-startTime)/1000000);
+    }
+
+    private static void lotOfQuerys(Connection conn) {
+        long startTime = 0;
+        long endTime = 0;
+
+        try {
+            startTime = System.nanoTime();
+            
+            for (int i=0; i<3; i++) {
+                PreparedStatement p = conn.prepareStatement(
+                    "SELECT COUNT(*) määrä FROM Elokuvat Where vuosi=?;"
+                );
+              
+                int randYear = randYear(1900,2000);
+                p.setInt(1, randYear);
+                p.executeQuery();
+            }
+            endTime = System.nanoTime();
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("Kysely kestää:");
+        System.out.println((endTime-startTime)/1000000);
     }
 }
