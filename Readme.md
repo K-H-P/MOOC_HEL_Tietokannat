@@ -4,7 +4,7 @@
 |-----------------|-----------|-------|
 | [ ] teht1 || Työn alla |
 | [ ] teht2 || Työn alla |
-| [ ] teht3 || Aloittamatta |
+| [X] teht3 | 28.2.2021 | - |
 | [ ] teht4 || Aloittamatta |
 | [X] teht5 | 26.2.2021 | Oikoluku pitää tehdä |
 | [X] teht6 | 25.2.2021 | Yksi kysely puuttu, oikoluku |
