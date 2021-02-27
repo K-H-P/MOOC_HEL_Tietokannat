@@ -69,9 +69,7 @@ public class testi {
 
     private static void addIndex(Connection conn) {
         try {
-            PreparedStatement index = conn.prepareStatement(
-                "CREATE INDEX idx vuosi ON Elokuvat (vuosi)"
-            );
+            PreparedStatement index = conn.prepareStatement("CREATE INDEX vuosi_index ON Elokuvat (vuosi)");
 
             index.executeUpdate();
 
@@ -100,7 +98,7 @@ public class testi {
                 System.out.println("Nyt kestää, älä pidätä hengitystä.");
             }
 
-            for (int i=0; i<10; i++) {
+            for (int i=0; i<1000000; i++) {
               PreparedStatement p = conn.prepareStatement(
                 "INSERT INTO Elokuvat (nimi, vuosi) VALUES(?, ?)"
               );
@@ -119,7 +117,7 @@ public class testi {
         }
 
         System.out.println("Lisätty rivit ajassa:");
-        System.out.println((endTime-startTime)/1000000);
+        System.out.println((endTime-startTime)/1000000000);
     }
 
     private static void lotOfQuerys(Connection conn) {
@@ -138,7 +136,7 @@ public class testi {
             }
             
             startTime = System.nanoTime(); 
-            for (int i=0; i<3; i++) {
+            for (int i=0; i<1000; i++) {
                 PreparedStatement p = conn.prepareStatement(
                     "SELECT COUNT(*) määrä FROM Elokuvat Where vuosi=?;"
                 );
@@ -154,7 +152,7 @@ public class testi {
         }
 
         System.out.println("Kysely kestää:");
-        System.out.println((endTime-startTime)/1000000);
+        System.out.println((endTime-startTime)/1000000000);
     }
 
     private static void order66(Statement statement) {
