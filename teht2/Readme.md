@@ -43,7 +43,7 @@ CREATE TABLE Kayttaja (
 
 **Verkkokaupassa on tuotteita, joilla on nimi, kuvaus ja hinta.**
 
-Tehdään *Tuote* taulu, johon tallennetaan tuotteen tiedot:
+Tehdään *Tuotteet* taulu, johon tallennetaan tuotteen tiedot:
 - id - uniikki id tuotteen tunnistamiseen
 - tuote - tuotteen nimi, joka näytetään verkkokaupassa
 - kuvaus- tuotteen lyhyt kuvaus
@@ -155,7 +155,7 @@ Tehdään *tuoteArvostelut* taulu, johon tallennetaan tuotteiden arvostelut käy
 - paivamaara - arvostelun päivämäärä
 
 ```
-CREATE TABLE tuoteArvostelut (
+CREATE TABLE TuoteArvostelut (
     tuoteArvosteluId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     tuoteId INT FOREIGN KEY REFERENCE Tuote(tuoteID),
     otsikko VARCHAR(25) NOT NULL,
@@ -166,8 +166,23 @@ CREATE TABLE tuoteArvostelut (
 ```
 
 **Tuotteista voidaan muodostaa tarjouspaketteja, joissa tietyt tuotteet saa tiettyyn hintaan pakettina.**
-```
 
+Tehdään *Tarjoukset* taulu, jossa on kerättynä yhteisalennukset omaavat tuotteet:
+- id - uniikki id tunnistamaan tarjous
+- tuoteId - uniikki id tunnistamaan tuote, joka kuuluu tarjoukseen (viittaus)
+- tuote - tuotteen nimi (viittaus)
+- hinta - tuotteiden hinta alennuksella
+- yhteisAlennus - tuotteiden alennus prosentteina
+
+```
+CREATE TABLE Tarjoukset (
+    tarjouksetId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    tuoteId INT FOREIGN KEY REFERENCE Tuotteet(tuoteId),
+    otsikko VARCHAR(25) NOT NULL,
+    tuote TEXT Reference Tuotteet(tuote),
+    hinta FLOAT NOT NULL,
+    yhteisAlennus FLOAT NOT NULL
+);
 ```
 
 
@@ -181,7 +196,7 @@ Tehdään *Toimipaikat* taulu, johon lisätään toimipaikat sekä viittaukset v
 - tuotteenMaara - tuotteiden määrä kpl
 
 ```
-CREATE TABLE toimipaikat (
+CREATE TABLE Toimipaikat (
     toimipaikkaId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     toimipaikka VARCHAR(25) NOT NULL,
     nimi VARCHAR (25),
@@ -191,6 +206,17 @@ CREATE TABLE toimipaikat (
 ```
 
 **Käyttäjä näkee tuotteen yhteydessä esimerkkejä, mitä tuotteita muut tämän tuotteen ostaneen asiakkaat ovat ostaneet.**
-```
 
+Tehdään *Ehdotukset* taulu, jossa on kerättynä ehdotuksia käyttäjälle:
+- id - uniikki id tunnistamaan ehdotus
+- tuoteId - uniikki id tunnistamaan tuote, joka kuuluu ehdotukseen (viittaus)
+- tuote - tuotteen nimi (viittaus)
+
+```
+CREATE TABLE Ehdotukset (
+    ehdotuksetId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    tuoteId INT FOREIGN KEY REFERENCE Tuotteet(tuoteId),
+    otsikko VARCHAR(25) NOT NULL,
+    tuote TEXT Reference Tuotteet(tuote)
+);
 ```
