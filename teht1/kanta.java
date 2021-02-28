@@ -1,10 +1,5 @@
 import java.sql.*;
 import java.util.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class kanta {
 
@@ -99,12 +94,13 @@ public class kanta {
         String name = three.nextLine();
 
         // ToDo: SQL query
-        String query = "";
+        String query = "SELECT arvosana, COUNT(*) as määrä FROM Kurssit K, Suoritukset S WHERE K.id=S.kurssi_id AND K.nimi='"+name+"' GROUP BY S.arvosana;";
         
         try (Statement stmt = c.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                System.out.println(rs.getString(""));
+                System.out.println(rs.getString("arvosana"));
+                System.out.println(rs.getString("määrä"));
             }
             
         } catch (SQLException e) {
