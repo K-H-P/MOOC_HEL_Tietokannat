@@ -6,8 +6,8 @@
 | [X] teht2 | 28.2.2021 | - |
 | [X] teht3 | 28.2.2021 | - |
 | [ ] teht4 || Aloittamatta |
-| [X] teht5 | 26.2.2021 | Oikoluku pitää tehdä |
-| [X] teht6 | 25.2.2021 | Yksi kysely puuttu, oikoluku |
+| [X] teht5 | 26.2.2021 | - |
+| [X] teht6 | 25.2.2021 | - |
 | [ ] teht7 |||
 
 ### teht1 & teht 3
