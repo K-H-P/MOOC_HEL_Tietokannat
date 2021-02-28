@@ -2,17 +2,18 @@
 
 | Valmis / Kesken | Päiväys   | Muuta |
 |-----------------|-----------|-------|
-| [ ] teht1 || Työn alla |
-| [ ] teht2 || Työn alla |
+| [X] teht1 | 28.2.2021 | - |
+| [X] teht2 | 28.2.2021 | - |
 | [X] teht3 | 28.2.2021 | - |
 | [ ] teht4 || Aloittamatta |
 | [X] teht5 | 26.2.2021 | Oikoluku pitää tehdä |
 | [X] teht6 | 25.2.2021 | Yksi kysely puuttu, oikoluku |
 | [ ] teht7 |||
 
-### teht1
+### teht1 & teht 3
 
-Ohjelma tulee ajaa toiminnolla
+Ohjelma tulee ajaa toiminnolla:
+
 ```
 java -classpath ".:sqlite-jdbc-3.32.3.2.jar" kanta.java
 ```
